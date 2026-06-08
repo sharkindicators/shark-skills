@@ -6,22 +6,47 @@ A Claude **skill** is a small package that teaches Claude how to perform a speci
 
 ## Available skills
 
-| Skill | Version | Description |
-|---|---|---|
-| [`shark-signal`](shark-signal/) | 0.1.0 | Send a JSON POST to a SharkSignals signal endpoint (TradingView-style webhook) for testing the signal pipeline. |
+| Skill | Version | Download | Description |
+|---|---|---|---|
+| [`shark-signal`](shark-signal/) | 0.1.1 | [shark-signal.skill](shark-signal.skill) | Send a JSON POST to a SharkSignals signal endpoint (TradingView-style webhook) for testing the signal pipeline. |
+
+Each skill is laid out as:
+
+- A folder (e.g. `shark-signal/`) containing the source — `SKILL.md` and `CHANGELOG.md`.
+- A `.skill` file at the repo root (e.g. `shark-signal.skill`) — the Claude installable, packaged archive.
 
 ## Installing a skill
 
-Each skill ships as a `.skill` file (a packaged zip archive) inside its folder.
+The right install path depends on which agent you're using. 
 
-**Option A — drag-and-drop in Claude Code:** Settings → Skills → Install from file → pick the `.skill`.
+### Claude
 
-**Option B — manual install:** Unzip the `.skill` archive (it's just a zip with a `.skill` extension) into your Claude skills directory:
+How you install depends on the Claude surface — they don't share skills with each other, so install separately on each surface you want it on.
 
-- Windows: `%USERPROFILE%\.claude\skills\`
-- macOS / Linux: `~/.claude/skills/`
+**Claude Code** — copy the skill's source folder into one of:
 
-After installing, restart Claude Code (or invoke `/reload-skills`) so the new skill shows up in the loaded list.
+- Personal (all projects): `~/.claude/skills/<skill-name>/` — on Windows, `%USERPROFILE%\.claude\skills\<skill-name>\`
+- Project-only: `.claude/skills/<skill-name>/` inside the project repo
+
+Claude Code auto-detects new skills in-session; no restart needed.
+
+**claude.ai** — Customize → Skills → Upload skill, then pick the `.skill` file from the table above. If the uploader rejects the `.skill` extension, rename to `.zip` first (the file's contents are identical — a `.skill` is just a renamed zip archive).
+
+After upload, refresh the page so the skill appears in the loaded list.
+
+### Codex
+
+The easiest path is to ask Codex itself to install from this repo, e.g.:
+
+> Install the shark-signal skill from https://github.com/sharkindicators/shark-skills
+
+Or:
+
+> Install all skills from https://github.com/sharkindicators/shark-skills
+
+## Security
+
+Only install skills from sources you trust — including ours. Skills can execute code and access data on whichever surface they're loaded on. Read the `SKILL.md` before installing anything, and prefer cloning this repo over downloading a `.skill` archive from an unknown mirror.
 
 ## Versioning
 
