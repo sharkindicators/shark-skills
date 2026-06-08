@@ -8,6 +8,14 @@ What counts as a breaking change here:
 - A change to the user-facing flow (questions removed, reordered, or whose accepted values change)
 - A change to the JSON body the skill POSTs (field renamed, removed, or type-changed) that the SharkSignals server no longer accepts from old skill versions
 
+## 0.1.1 — 2026-06-08
+
+Documentation clarification of Step 3. No change to the JSON body, the user flow, or what triggers the skill — old SKILL.md instructions remained valid against the same server contract.
+
+- Split the curl example into POSIX (bash/zsh) and PowerShell variants. PowerShell needs `curl.exe` because `curl` is an alias for `Invoke-WebRequest` and rejects POSIX-style flags.
+- Switch the bash example from `-d` to `--data-raw` for fully literal body handling (no special treatment of `@` or stripped newlines).
+- Add an explicit warning that JSON property names and string values must remain double-quoted (`{action:buy,...}` is not valid JSON).
+
 ## 0.1.0 — 2026-06-04
 
 Initial release.
