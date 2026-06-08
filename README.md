@@ -57,6 +57,10 @@ Skills use [semver](https://semver.org/): `MAJOR.MINOR.PATCH`. Each skill's vers
 
 Pre-1.0 (`0.x.y`) means the skill is still stabilizing and breaking changes may land in any minor release.
 
+## License
+
+This repo is licensed under [Apache License 2.0](LICENSE). Skills here are provided "as is" without warranty — see [LICENSE](LICENSE) and [NOTICE](NOTICE) for the full terms. This is especially relevant when a skill helps you send orders or signals to live trading systems: validate any generated request against a test environment before pointing it at production.
+
 ## Issues and feedback
 
 Bug reports, feature requests, and questions: [open an issue](https://github.com/sharkindicators/shark-skills/issues).
