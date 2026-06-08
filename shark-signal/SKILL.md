@@ -55,13 +55,29 @@ Because `AskUserQuestion` is capped at 4 questions per call and the URL needs sp
 
 If the user dismisses either call without answering, stop — don't invent values or substitute defaults.
 
-### 3. Fire the curl
+### 3. Send the POST
+
+Choose the command form for the active shell. The request body must reach the server as valid JSON with double-quoted property names and string values.
+
+**Bash, zsh, or other POSIX shells: use curl with single-quoted JSON.**
 
 ```bash
 curl -X POST "<url>" \
   -H "Content-Type: application/json" \
-  -d '{"action": "<action>", "quantity": "<qty>", "symbol": "<sym>", "assetClass": "<class>"}'
+  --data-raw '{"action":"<action>","quantity":"<qty>","symbol":"<sym>","assetClass":"<class>"}'
 ```
+
+**PowerShell on Windows: use `curl.exe`, not `curl`.** In PowerShell, `curl` may resolve to an alias instead of real curl. Put the JSON in a variable first, then pass that variable to `curl.exe`.
+
+```powershell
+$body = '{"action":"<action>","quantity":"<qty>","symbol":"<sym>","assetClass":"<class>"}'
+
+curl.exe -X POST "<url>" `
+  -H "Content-Type: application/json" `
+  --data-raw $body
+```
+
+Never send JSON that looks like `{action:buy,...}`. That is not valid JSON; property names and string values must keep their double quotes.
 
 Do **not** add `-k` / `--insecure`. Calls must validate the server's TLS certificate. 
 
