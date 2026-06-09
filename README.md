@@ -61,8 +61,8 @@ Pre-1.0 (`0.x.y`) means the skill is still stabilizing and breaking changes may 
 
 This repo is licensed under [Apache License 2.0](LICENSE). Skills here are provided "as is" without warranty — see [LICENSE](LICENSE) and [NOTICE](NOTICE) for the full terms. This is especially relevant when a skill helps you send orders or signals to live trading systems: validate any generated request against a test environment before pointing it at production.
 
-## Issues and feedback
+## Support
 
-Bug reports, feature requests, and questions: [open an issue](https://github.com/sharkindicators/shark-skills/issues).
+For bug reports, feature requests, and questions, please email [support@sharkindicators.com](mailto:support@sharkindicators.com).
 
-When reporting a bug with a skill, please include the version line the skill announces. For `shark-signal`, that's the `shark-signal v0.X.Y` message it sends right before any prompts — paste that into the issue so we know exactly which version you're running.
+When reporting a bug with a skill, please include the version line the skill announces. For `shark-signal`, that's the `shark-signal v0.X.Y` message it sends right before any prompts — paste that into your email so we know exactly which version you're running.
