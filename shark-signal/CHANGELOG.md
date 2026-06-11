@@ -8,6 +8,13 @@ What counts as a breaking change here:
 - A change to the user-facing flow (questions removed, reordered, or whose accepted values change)
 - A change to the JSON body the skill POSTs (field renamed, removed, or type-changed) that the SharkSignals server no longer accepts from old skill versions
 
+## 0.2.0 — 2026-06-11
+
+New step reporting POST outcome to the user. No change to the JSON body or to what triggers the skill.
+
+- Added step 4: read the HTTP status from curl and tell the user the outcome. 2xx → "Your SharkSignal was successfully sent. Check https://app.sharksignals.com for the status of your trade." Anything else → the status code plus the structured envelope fields (`error`, `detail`, `errorId`) from the response body, or the raw body if unstructured, or the curl-level error if no response at all.
+- Step 3's curl command (both POSIX and PowerShell variants) now appends `-w "\nHTTP %{http_code}\n"` so the status code is unambiguously visible as the last line of output for step 4 to read.
+
 ## 0.1.1 — 2026-06-08
 
 Documentation clarification of Step 3. No change to the JSON body, the user flow, or what triggers the skill — old SKILL.md instructions remained valid against the same server contract.

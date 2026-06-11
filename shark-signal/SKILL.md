@@ -2,7 +2,7 @@
 name: shark-signal
 description: Sends a JSON POST via curl to a SharkSignals signal endpoint (`/signal/{route-id}/{signal-id}` URL used by TradingView-style webhooks). ALWAYS use this skill when the user says any variation of "send shark signal", "send sharksignal", "post sharksignal", "post shark signal", or asks to send/post a test signal, hit the `/signal/...` endpoint, trigger a SharkSignals webhook, or test the signal pipeline — even if they don't explicitly mention curl or this skill. Prompts the user via menus for action, quantity, symbol, and assetClass. Reuses the URL, Quantity and Symbol from earlier in the session if they were already used; otherwise asks for them. Do NOT use this for unrelated curl/HTTP requests that don't target a SharkSignals signal endpoint.
 metadata:
-  version: 0.1.1
+  version: 0.2.0
 ---
 
 # Send a SharkSignals signal
@@ -11,7 +11,7 @@ metadata:
 
 Before any prompts, scans, or curl calls, send the user a single line:
 
-> `shark-signal v0.1.1` — preparing to send a SharkSignals signal.
+> `shark-signal v0.2.0` — preparing to send a SharkSignals signal.
 
 This makes support bug reports trivially diagnosable — the customer can paste the line back. Keep it to one line. When the version in the frontmatter changes, update the literal string above to match.
 
@@ -64,7 +64,8 @@ Choose the command form for the active shell. The request body must reach the se
 ```bash
 curl -X POST "<url>" \
   -H "Content-Type: application/json" \
-  --data-raw '{"action":"<action>","quantity":"<qty>","symbol":"<sym>","assetClass":"<class>"}'
+  --data-raw '{"action":"<action>","quantity":"<qty>","symbol":"<sym>","assetClass":"<class>"}' \
+  -w "\nHTTP %{http_code}\n"
 ```
 
 **PowerShell on Windows: use `curl.exe`, not `curl`.** In PowerShell, `curl` may resolve to an alias instead of real curl. Put the JSON in a variable first, then pass that variable to `curl.exe`.
@@ -74,7 +75,8 @@ $body = '{"action":"<action>","quantity":"<qty>","symbol":"<sym>","assetClass":"
 
 curl.exe -X POST "<url>" `
   -H "Content-Type: application/json" `
-  --data-raw $body
+  --data-raw $body `
+  -w "\nHTTP %{http_code}\n"
 ```
 
 Never send JSON that looks like `{action:buy,...}`. That is not valid JSON; property names and string values must keep their double quotes.
@@ -83,7 +85,21 @@ Do **not** add `-k` / `--insecure`. Calls must validate the server's TLS certifi
 
 All four field values are sent as **JSON strings**, including quantity — that matches the payload shape the SharkSignals endpoint expects.
 
-Show the response back to the user. If curl hangs past its default timeout with no response body, surface that the SharkSignals server may have accepted the request but be slow to reply; the user might want to check logs.
+The `-w "\nHTTP %{http_code}\n"` flag appends a trailing `HTTP <code>` line after the response body so step 4 can read the status code unambiguously. Show the response (including that trailing line) back to the user. If curl hangs past its default timeout with no response body, surface that the SharkSignals server may have accepted the request but be slow to reply; the user might want to check logs.
+
+### 4. Report success or failure to the user
+
+Read the `HTTP <code>` line at the bottom of curl's output and tell the user the outcome:
+
+- **2xx (200–299)** — send the user this exact line:
+
+  > Your SharkSignal was successfully sent. Check https://app.sharksignals.com for the status of your trade.
+
+- **Anything else** — tell the user the status code and the relevant details from the response body. SharkSignals returns a structured envelope on failure with `error`, `detail`, and `errorId` fields; quote those if present. Format:
+
+  > The SharkSignals server returned HTTP `<code>`. error: "...", detail: "...", errorId: "...".
+
+  If the response body has no recognizable structure, paste the raw response instead. If curl failed before getting a response at all (connection refused, DNS failure, TLS handshake error, etc. — no `HTTP <code>` line), report that directly without inventing a status code.
 
 ## Why these choices
 

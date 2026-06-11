@@ -8,7 +8,7 @@ An AI **skill** is a small package that teaches your AI agent how to perform a s
 
 | Skill | Version | Download | Description |
 |---|---|---|---|
-| [`shark-signal`](shark-signal/) | 0.1.1 | [shark-signal.skill](shark-signal.skill) | Send a JSON POST to a SharkSignals signal endpoint (TradingView-style webhook) for testing the signal pipeline. |
+| [`shark-signal`](shark-signal/) | 0.2.0 | [shark-signal.skill](shark-signal.skill) | Send a JSON POST to a SharkSignals signal endpoint (TradingView-style webhook) for testing the signal pipeline. |
 
 Each skill is laid out as:
 
