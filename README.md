@@ -1,8 +1,8 @@
 # shark-skills
 
-Official Claude skills from [SharkIndicators](https://sharkindicators.com) for working with the SharkSignals platform.
+Official AI skills from [SharkIndicators](https://sharkindicators.com) for working with the SharkSignals platform.
 
-A Claude **skill** is a small package that teaches Claude how to perform a specific task. Skills are loaded by Claude Code (and other Claude clients that support them) and trigger automatically when a user's request matches what the skill is for.
+An AI **skill** is a small package that teaches your AI agent how to perform a specific task. Skills are loaded by Claude or Codex, and trigger automatically when a user's request matches what the skill is for.
 
 ## Available skills
 
@@ -19,24 +19,9 @@ Each skill is laid out as:
 
 The right install path depends on which agent you're using. 
 
-### Claude
+### Claude or Codex
 
-How you install depends on the Claude surface — they don't share skills with each other, so install separately on each surface you want it on.
-
-**Claude Code** — copy the skill's source folder into one of:
-
-- Personal (all projects): `~/.claude/skills/<skill-name>/` — on Windows, `%USERPROFILE%\.claude\skills\<skill-name>\`
-- Project-only: `.claude/skills/<skill-name>/` inside the project repo
-
-Claude Code auto-detects new skills in-session; no restart needed.
-
-**claude.ai** — Customize → Skills → Upload skill, then pick the `.skill` file from the table above. If the uploader rejects the `.skill` extension, rename to `.zip` first (the file's contents are identical — a `.skill` is just a renamed zip archive).
-
-After upload, refresh the page so the skill appears in the loaded list.
-
-### Codex
-
-The easiest path is to ask Codex itself to install from this repo, e.g.:
+The easiest path is to ask your AI agent itself to install from this repo, e.g.:
 
 > Install the shark-signal skill from https://github.com/sharkindicators/shark-skills
 
