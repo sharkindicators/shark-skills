@@ -8,7 +8,7 @@ An AI **skill** is a small package that teaches your AI agent how to perform a s
 
 | Skill | Version | Download | Description |
 |---|---|---|---|
-| [`shark-signal`](shark-signal/) | 0.2.0 | [shark-signal.skill](shark-signal.skill) | Send a JSON POST to a SharkSignals signal endpoint (TradingView-style webhook) for testing the signal pipeline. |
+| [`shark-signal`](shark-signal/) | 1.0.0 | [shark-signal.skill](shark-signal.skill) | Send a JSON POST to a SharkSignals signal endpoint (TradingView-style webhook) for testing the signal pipeline. |
 
 Each skill is laid out as:
 
@@ -40,7 +40,7 @@ Skills use [semver](https://semver.org/): `MAJOR.MINOR.PATCH`. Each skill's vers
 - `metadata.version` in the skill's `SKILL.md` frontmatter — the canonical version.
 - A `CHANGELOG.md` next to `SKILL.md` documenting what changed in each release.
 
-Pre-1.0 (`0.x.y`) means the skill is still stabilizing and breaking changes may land in any minor release.
+Once a skill reaches `1.0.0` it's considered stable: breaking changes require a major version bump. Skills still on `0.x.y` are stabilizing, and breaking changes may land in any minor release.
 
 ## License
 
@@ -50,4 +50,4 @@ This repo is licensed under [Apache License 2.0](LICENSE). Skills here are provi
 
 For bug reports, feature requests, and questions, please email [support@sharkindicators.com](mailto:support@sharkindicators.com).
 
-When reporting a bug with a skill, please include the version line the skill announces. For `shark-signal`, that's the `shark-signal v0.X.Y` message it sends right before any prompts — paste that into your email so we know exactly which version you're running.
+When reporting a bug with a skill, please include the version line the skill announces. For `shark-signal`, that's the `shark-signal vX.Y.Z` message it sends right before any prompts — paste that into your email so we know exactly which version you're running.

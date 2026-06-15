@@ -2,7 +2,7 @@
 name: shark-signal
 description: Sends a JSON POST via curl to a SharkSignals signal endpoint (`/signal/{route-id}/{signal-id}` URL used by TradingView-style webhooks). ALWAYS use this skill when the user says any variation of "send shark signal", "send sharksignal", "post sharksignal", "post shark signal", or asks to send/post a test signal, hit the `/signal/...` endpoint, trigger a SharkSignals webhook, or test the signal pipeline — even if they don't explicitly mention curl or this skill. Prompts the user via menus for action, quantity, symbol, and assetClass. Reuses the URL, Quantity and Symbol from earlier in the session if they were already used; otherwise asks for them. Do NOT use this for unrelated curl/HTTP requests that don't target a SharkSignals signal endpoint.
 metadata:
-  version: 0.2.0
+  version: 1.0.0
 ---
 
 # Send a SharkSignals signal
@@ -11,7 +11,7 @@ metadata:
 
 Before any prompts, scans, or curl calls, send the user a single line:
 
-> `shark-signal v0.2.0` — preparing to send a SharkSignals signal.
+> `shark-signal v1.0.0` — preparing to send a SharkSignals signal.
 
 This makes support bug reports trivially diagnosable — the customer can paste the line back. Keep it to one line. When the version in the frontmatter changes, update the literal string above to match.
 

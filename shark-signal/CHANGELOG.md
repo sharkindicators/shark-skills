@@ -1,12 +1,16 @@
 # Changelog
 
-All notable changes to the `shark-signal` skill. Versions follow [semver](https://semver.org/): MAJOR.MINOR.PATCH. Pre-1.0 means breaking changes are still on the table.
+All notable changes to the `shark-signal` skill. Versions follow [semver](https://semver.org/): MAJOR.MINOR.PATCH. From 1.0.0 on, a breaking change (see the criteria below) requires a major version bump.
 
 What counts as a breaking change here:
 
 - A trigger phrase removed from the `description` (customers learned to say it; it stops working)
 - A change to the user-facing flow (questions removed, reordered, or whose accepted values change)
 - A change to the JSON body the skill POSTs (field renamed, removed, or type-changed) that the SharkSignals server no longer accepts from old skill versions
+
+## 1.0.0 — 2026-06-15
+
+First stable release. No functional change from 0.2.0 — the JSON body, user flow, and trigger phrases are identical. This release marks the skill as production-ready and commits to semver: from here, any breaking change (per the criteria above) requires a major version bump.
 
 ## 0.2.0 — 2026-06-11
 
