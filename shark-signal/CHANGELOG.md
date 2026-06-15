@@ -8,6 +8,15 @@ What counts as a breaking change here:
 - A change to the user-facing flow (questions removed, reordered, or whose accepted values change)
 - A change to the JSON body the skill POSTs (field renamed, removed, or type-changed) that the SharkSignals server no longer accepts from old skill versions
 
+## 1.0.1 — 2026-06-15
+
+Windows fix. The body shape, user flow, and trigger phrases are unchanged.
+
+- Replaced the PowerShell `curl.exe` command with `Invoke-WebRequest -Body`. On Windows PowerShell, passing a quoted JSON string to a native exe strips the double quotes, so the body reached the server as `{action:buy,...}` and was rejected with a 500. `Invoke-WebRequest` binds the body in-process, so the quotes survive — no temp file, no escaping, and it ships with Windows by default (no bash dependency).
+- The PowerShell path now emits the same trailing `HTTP <code>` line (via try/catch) that curl produces via `-w`, so step 4 reads status uniformly across shells.
+- Added explicit guidance to prefer a Unix-like shell (bash/zsh, incl. Git Bash/WSL) and use PowerShell only as a fallback when none is available.
+- Removed the "never send `{action:buy,...}`" warning — it framed a shell bug as a discipline problem. Replaced with an explanation of why each shell uses a body channel it can't corrupt.
+
 ## 1.0.0 — 2026-06-15
 
 First stable release. No functional change from 0.2.0 — the JSON body, user flow, and trigger phrases are identical. This release marks the skill as production-ready and commits to semver: from here, any breaking change (per the criteria above) requires a major version bump.
